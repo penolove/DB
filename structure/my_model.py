@@ -40,7 +40,9 @@ class BasicModel(nn.Module):
     def __init__(self):
         nn.Module.__init__(self)
         self.backbone = _resnet(BasicBlock, [2, 2, 2, 2], progress=True)
-        self.decoder = SegDetector(in_channels=[64, 128, 256, 512], adaptive=True, k=50)
+        self.decoder = SegDetector(
+            in_channels=[64, 128, 256, 512], weights=None, adaptive=True, k=50
+        )
 
     def forward(self, data, *args, **kwargs):
         return self.decoder(self.backbone(data), *args, **kwargs)
