@@ -43,4 +43,4 @@ class BasicModel(nn.Module):
         self.decoder = SegDetector(in_channels=[64, 128, 256, 512], adaptive=True, k=50)
 
     def forward(self, data, *args, **kwargs):
-        return self.decoder(self.backbone(data), *args, **kwargs)
+        return self.decoder(self.backbone.forward_fpn(data), *args, **kwargs)
